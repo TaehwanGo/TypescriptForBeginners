@@ -1,0 +1,13 @@
+{
+  "name": "TypescriptForBeginners",
+  "version": "1.0.0",
+  "description": "Learning Typescript by making a Blockchain with it",
+  "main": "index.js",
+  "repository": "https://github.com/TaehwanGo/TypescriptForBeginners.git",
+  "author": "TaehwanGo <gth1123@naver.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "prestart": "tsc"
+  }
+}
