@@ -64,6 +64,8 @@ const createNewBlock = (data:string):Block => {
 
 // console.log(createNewBlock("hello"), createNewBlock("bye-bye"));
 
+const getHashForBlock = (aBlock:Block):string => Block.calculateBlockHash(aBlock.index, aBlock.previousHash, aBlock.timestamp, aBlock.data);
+
 const isBlockValid = (candidateBlock:Block, previousBlock:Block):boolean => { // 유효한지 검사
     if(!Block.validateStructure(candidateBlock)){
         return false;
@@ -71,8 +73,16 @@ const isBlockValid = (candidateBlock:Block, previousBlock:Block):boolean => { //
         return false;
     } else if(previousBlock.hash !== candidateBlock.previousHash){
         return false;
-    } else if(true){ // 블록의 해쉬가 유효한지 확인하기 위해 따로 해쉬를 계산해서 들어온 블록의 해쉬가 실제로 있는지 체크 
+    } else if(getHashForBlock(candidateBlock) !== candidateBlock.hash){ // 블록의 해쉬가 유효한지 확인하기 위해 따로 해쉬를 계산해서 들어온 블록의 해쉬가 실제로 있는지 체크 
+        return false;
+    } else {
+        return true;
+    }
+}
 
+const addBlock = (candidateBlock:Block):void => {
+    if(isBlockValid(candidateBlock, getLatestBlock())){
+        blockChain.push(candidateBlock);
     }
 }
 
